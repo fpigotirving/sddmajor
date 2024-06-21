@@ -3,7 +3,6 @@ from tkinter import messagebox
 import customtkinter as ctk
 import os
 import configuration
-from tkinter import messagebox
 
 print("game started")
 
@@ -117,30 +116,30 @@ def recommend_surrender():
 # Calculate best move based on shoe value
 def calculate_best_move(): #custom algorithm
     print("Calculating best move")
-    userplayer = players[configuration.playerpos]
+    userplayer = players[configuration.playerpos] #get the player that the user is controlling
     print("User player:", userplayer) # debug
-    print(cards_in_shoe)
-    calculate_shoe_value()
-    total_cards = sum(cards_in_shoe.values())
-    print("Amount of cards in shoe:", total_cards)
-    expected_next_card = shoe_value // total_cards
+    print(cards_in_shoe) 
+    calculate_shoe_value() #see calculate_shoe_value
+    total_cards = sum(cards_in_shoe.values()) #get the total amount of cards in the shoe
+    print("Amount of cards in shoe:", total_cards) #debug
+    expected_next_card = shoe_value // total_cards #get the avg expected value of the next card
     print("Expected next card value:", expected_next_card)
     print(holding_ace['dealer']) #test
-    if (holding_ace['dealer']) != 0:
-        if configuration.surrender_allowed == 'Early' or 'Late':
-            if cards_in_shoe['tvcs'] < 16*configuration.decks:
-                recommend_surrender()
+    if (holding_ace['dealer']) != 0: #if the dealer is holding an ace
+        if configuration.surrender_allowed == 'Early' or 'Late': #and if surrender is allowed
+            if cards_in_shoe['tvcs'] < 16*configuration.decks:# and if theres at least one TVC on the table
+                recommend_surrender() #recommend surrender
                 return
             else:
                 pass
 
     
     
-    if current_value[userplayer] + expected_next_card > 21:
-        likelybust = True
+    if current_value[userplayer] + expected_next_card > 21: #if the next card will put the user player above 21
+        likelybust = True #theyll be likely to bust
         print("Likely bust")
     else:
-        likelybust = False
+        likelybust = False #if not, theyre not likely to bust
         print("Not likely to bust")
     if len(players) == 4:
         if userplayer == 'player1':
@@ -153,18 +152,18 @@ def calculate_best_move(): #custom algorithm
             workingtotal1 = current_value['player1']
             workingtotal2 = current_value['player2']
         if workingtotal1 or workingtotal2 > current_value[userplayer]:
-            recommend_hit()
+            recommend_hit() # if the other players have a higher total, recommend hit
     elif len(players) == 3:
         if userplayer == 'player1':
             workingtotal1 = current_value['player2']
         elif userplayer == 'player2':
             workingtotal1 = current_value['player1']
         if workingtotal1 > current_value[userplayer]:
-            recommend_hit()
+            recommend_hit() # if the other player has a higher total, recommend hit
     elif len(players) == 2 and likelybust == True:
-        recommend_stand()
+        recommend_stand() # if the user player is likely to bust, and is likely to win even if they dont hit, recommend stand
     else:
-        recommend_hit()
+        recommend_hit()#else
         
 
 
