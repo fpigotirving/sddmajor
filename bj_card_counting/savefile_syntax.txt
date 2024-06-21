@@ -1,0 +1,33 @@
+Decks used
+Player position in number
+Number of players
+blank
+Expected next card *will not be accurate 
+Shoe Value *also will not be accurate. Recalculate
+Aces in shoe
+2s ''
+3s ''
+4s ''
+5s ''
+6s ''
+7s ''
+8s ''
+9s ''
+tvcs ''
+Player position in format players
+blank
+dealer cards in hand
+dealer hand value
+dealer holding aces
+player1 cards in hand
+player1 hand value
+player1 holding aces
+player2 cards in hand
+player2 hand value
+player2 holding aces
+player3 cards in hand
+player3 hand value
+player3 holding aces
+
+
+
